@@ -1,0 +1,25 @@
+form {
+    margin-top: 20px;
+}
+
+#signup-form {
+    display: none;
+}
+
+#signup-error {
+    display: none;
+    color: #f54242;
+    font-weight: bold;
+}
+
+#login-error {
+    display: none;
+    color: #f54242;
+    font-weight: bold;
+}
+
+#signup-success {
+    display: none;
+    color: #42f545;
+    font-weight: bold;
+}
