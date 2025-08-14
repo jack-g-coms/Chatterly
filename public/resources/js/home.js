@@ -6,14 +6,6 @@ const loginErrorTxt = document.querySelector("#login-error")
 
 const signupSuccessTxt = document.querySelector("#signup-success");
 
-(async() => {
-    const response = await fetch("/api/v1/me", {
-        method: "GET",
-        credentials: "include"
-    });
-    console.log(await response.json());
-})();
-
 document.querySelector("#signup-btn").addEventListener("click", (e) => {
     signupForm.style.display = "flex";
     loginForm.style.display = "none";
@@ -43,7 +35,7 @@ signupForm.addEventListener("submit", async (e) => {
     if (response.status == 409) {
         signupErrorTxt.style.display = "block";
         signupErrorTxt.innerHTML = resData.error;
-    } else if (response.status == 400) {
+    } else if (response.status == 400 || response.status == 500) {
         signupErrorTxt.style.display = "block";
         signupErrorTxt.innerHTML = `Error: ${resData.error}`;
     } else if (response.status == 200) {
@@ -66,7 +58,7 @@ loginForm.addEventListener("submit", async (e) => {
     if (response.status == 401) {
         loginErrorTxt.style.display = "block";
         loginErrorTxt.innerHTML = resData.error;
-    } else if (response.status == 400) {
+    } else if (response.status == 400 || response.status == 500) {
         loginErrorTxt.style.display = "block";
         loginErrorTxt.innerHTML = `Error: ${resData.error}`;
     } else if (response.status == 200) {
