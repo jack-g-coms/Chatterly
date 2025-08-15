@@ -29,7 +29,7 @@ const getUser = (query) => {
                 }
             )
         } else {
-            reject(new Error("GetUser query must be a number (id) or a string (username)"))
+            reject(new Error("getUser query must be a number (id) or a string (username)"))
         }
     });
 }

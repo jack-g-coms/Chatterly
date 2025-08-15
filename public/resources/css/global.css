@@ -1,6 +1,31 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+}
+
+input {
+    margin: 5px 0px;
+    border-radius: 5px;
+    padding: 5px 5px;
+    font-size: 1em;
+}
+
+button {
+    font-size: 1em;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+h1 {
+    margin: 5px 0px;
+}
+
+h3 {
+    margin: 2px 0px;
 }
 
 body {
@@ -41,7 +66,5 @@ form input {
 }
 
 .form-btns button {
-    padding: 5px 5px;
     flex: 0 0 calc(50% - 2.5px);
-    box-sizing: border-box;
 }

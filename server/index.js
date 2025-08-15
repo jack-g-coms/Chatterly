@@ -14,6 +14,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
 app.use("/api/v1", require("./api"));
 
+app.get("/chat", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/chat.html"));
+});
+
+app.get(["/", "/login", "/signup"], (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+});
+
 server.listen(process.env.PORT, () => {
     console.log(`Server running on port: ${process.env.PORT}`);
 });

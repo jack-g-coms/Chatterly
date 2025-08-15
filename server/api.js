@@ -1,10 +1,11 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const socketIO = require("socket.io");
+const jwt = require("jsonwebtoken");
 const { server } = require("./express");
 
-const User = require("./classes/user");
 const users = require("./db/users");
+const messages = require("./db/messages");
 const middleware = require("./middleware");
 
 const wsServer = new socketIO.Server(server);
@@ -12,20 +13,37 @@ const router = express.Router();
 
 wsServer.use(middleware.requiresSocketLogin)
 wsServer.on("connection", (ws) => {
-    ws.on("join", (callback) => {
-        callback({
-            message: "Success",
-            data: []
-        });
+    ws.on("join", async (callback) => {
+        try {
+            const messageData = await messages.getMessages();
+
+            callback({
+                message: "Success",
+                data: messageData
+            });
+        } catch (err) {
+            callback({
+                message: "Error",
+                error: err.message
+            });
+        }
     });
 
-    ws.on("message", (message, callback) => {
-        const messageData = {
-            user: ws.data.user,
-            content: message
-        };
-        // messages.push(messageData);
-        wsServer.emit("message", messageData)
+    ws.on("message", async (content, callback) => {
+        try {
+            const messageId = await messages.createMessage(ws.data.user.userId, content);
+            const messageData = await messages.getMessage(messageId);
+
+            wsServer.emit("message", messageData);
+            callback({
+                message: "Success"
+            });
+        } catch (err) {
+            callback({
+                message: "Error",
+                error: err.message 
+            });
+        }
     });
 });
 
@@ -33,6 +51,14 @@ router.get("/me", middleware.requireRESTLogin, (req, res) => {
     res.status(200).json({
         message: "Success",
         data: req.user
+    });
+});
+
+router.post("/logout", (req, res) => {
+    res.clearCookie("auth_token");
+
+    res.status(200).json({
+        message: "Success"
     });
 });
 

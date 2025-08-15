@@ -1,7 +1,5 @@
 const database = require("./index");
 
-console.log(database)
-
 module.exports = async () => {
     database.run(
         `CREATE TABLE IF NOT EXISTS users (
@@ -15,5 +13,15 @@ module.exports = async () => {
                 throw err;
             }
         }
+    );
+
+    database.run(
+        `CREATE TABLE IF NOT EXISTS messages (
+            messageId INTEGER PRIMARY KEY AUTOINCREMENT,
+            userId INTEGER,
+            content TEXT,
+            timestamp INTEGER,
+            FOREIGN KEY (userId) REFERENCES users(userId)
+        )`
     );
 }

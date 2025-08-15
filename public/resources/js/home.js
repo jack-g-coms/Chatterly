@@ -62,6 +62,6 @@ loginForm.addEventListener("submit", async (e) => {
         loginErrorTxt.style.display = "block";
         loginErrorTxt.innerHTML = `Error: ${resData.error}`;
     } else if (response.status == 200) {
-        window.location.href = "/chat.html";
+        window.location.href = "/chat";
     }
 });

@@ -31,13 +31,16 @@ const requireRESTLogin = async (req, res, next) => {
 };
 
 const requiresSocketLogin = async (ws, next) => {
+    const unauthorizedError = new Error("Unauthorized");
     const cookieString = ws.handshake.headers.cookie;
     if (!cookieString) {
+        next(unauthorizedError);
         return;
     }
     
     const token = cookie.parse(cookieString)?.auth_token;
     if (!token) {
+        next(unauthorizedError);
         return;
     }
     
@@ -49,7 +52,7 @@ const requiresSocketLogin = async (ws, next) => {
             next();
         }
     } catch (err) {
-        throw err;
+        next(err);
     }
 };
 
