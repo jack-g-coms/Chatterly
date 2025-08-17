@@ -43,7 +43,7 @@ logoutBtn.addEventListener("click", async (e) => {
         credentials: "include"
     }).then((res) => {
         window.location.href = "/login";
-    })
+    });
 });
 
 socket.emit("join", ({message, error, data}) => {

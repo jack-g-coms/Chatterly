@@ -1,6 +1,6 @@
 const database = require("./index");
 
-module.exports = async () => {
+module.exports = () => {
     database.run(
         `CREATE TABLE IF NOT EXISTS users (
             userId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,6 +22,11 @@ module.exports = async () => {
             content TEXT,
             timestamp INTEGER,
             FOREIGN KEY (userId) REFERENCES users(userId)
-        )`
+        )`,
+        (err) => {
+            if (err) {
+                throw err;
+            }
+        }
     );
 }

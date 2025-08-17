@@ -24,7 +24,7 @@ const getUser = (query) => {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(new User(row));
+                        resolve(row ? new User(row) : null);
                     }
                 }
             )

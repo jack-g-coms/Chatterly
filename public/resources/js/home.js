@@ -65,3 +65,11 @@ loginForm.addEventListener("submit", async (e) => {
         window.location.href = "/chat";
     }
 });
+
+if (window.location.pathname == "/login") {
+    loginForm.style.display = "flex";
+    signupForm.style.display = "none";
+} else if (window.location.pathname == "/signup") {
+    loginForm.style.display = "none";
+    signupForm.style.display = "flex";
+}

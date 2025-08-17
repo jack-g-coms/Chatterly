@@ -113,7 +113,7 @@ router.post("/signup", async (req, res) => {
         const user = await users.getUser(req.body.username);
 
         if (!user) {
-            let hashedPswd = await bcrypt.hash(req.body.password, 10);;
+            let hashedPswd = await bcrypt.hash(req.body.password, 10);
 
             if (hashedPswd) {
                 await users.createUser(req.body.username, hashedPswd);
