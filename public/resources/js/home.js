@@ -1,27 +1,20 @@
+import * as notifications from "./modules/notifications.js";
+
+notifications.attach();
+
 const loginForm = document.querySelector("#login-form");
 const signupForm = document.querySelector("#signup-form");
 
-const signupErrorTxt = document.querySelector("#signup-error");
-const loginErrorTxt = document.querySelector("#login-error")
-
-const signupSuccessTxt = document.querySelector("#signup-success");
-
 document.querySelector("#signup-btn").addEventListener("click", (e) => {
-    signupForm.style.display = "flex";
-    loginForm.style.display = "none";
-    signupErrorTxt.style.display = "none";
-    signupSuccessTxt.style.display = "none";
+    window.location.href = "/signup";
 });
 
 document.querySelector("#login-btn").addEventListener("click", (e) => {
-    loginForm.style.display = "flex";
-    signupForm.style.display = "none";
-    loginErrorTxt.style.display = "none";
+    window.location.href = "/login";
 });
 
 signupForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    signupSuccessTxt.style.display = "none";
 
     const response = await fetch("/api/v1/signup", {
         method: "POST",
@@ -33,13 +26,11 @@ signupForm.addEventListener("submit", async (e) => {
 
     const resData = await response.json();
     if (response.status == 409) {
-        signupErrorTxt.style.display = "block";
-        signupErrorTxt.innerHTML = resData.error;
+        notifications.create("error", "Failed", resData.error);
     } else if (response.status == 400 || response.status == 500) {
-        signupErrorTxt.style.display = "block";
-        signupErrorTxt.innerHTML = `Error: ${resData.error}`;
+        notifications.create("error", "Failed", `Error: ${resData.error}`);
     } else if (response.status == 200) {
-        signupSuccessTxt.style.display = "block";
+        notifications.create("success", "Success", "You can now login to Chatterly with these credentials!");
     }
 });
 
@@ -56,20 +47,18 @@ loginForm.addEventListener("submit", async (e) => {
 
     const resData = await response.json();
     if (response.status == 401) {
-        loginErrorTxt.style.display = "block";
-        loginErrorTxt.innerHTML = resData.error;
+        notifications.create("error", "Failed", resData.error);
     } else if (response.status == 400 || response.status == 500) {
-        loginErrorTxt.style.display = "block";
-        loginErrorTxt.innerHTML = `Error: ${resData.error}`;
+        notifications.create("error", "Failed", `Error: ${resData.error}`);
     } else if (response.status == 200) {
         window.location.href = "/chat";
     }
 });
 
 if (window.location.pathname == "/login") {
-    loginForm.style.display = "flex";
-    signupForm.style.display = "none";
+    loginForm.parentElement.style.display = "flex";
+    signupForm.parentElement.style.display = "none";
 } else if (window.location.pathname == "/signup") {
-    loginForm.style.display = "none";
-    signupForm.style.display = "flex";
+    loginForm.parentElement.style.display = "none";
+    signupForm.parentElement.style.display = "flex";
 }

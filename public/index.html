@@ -3,7 +3,7 @@
         <title>Chatterly</title>
         <link rel="icon" type="image/png" href="./resources/images/logo.png">
         <link rel="stylesheet" href="./resources/css/global.css">
-        <link rel="stylesheet" href="./resources/css/index.css">
+        <link rel="stylesheet" href="./resources/css/forms.css">
     </head>
 
     <body>
@@ -20,48 +20,61 @@
         </div>
 
         <div class="page-content">
-            <form id="login-form">
-                <span id="login-error">Error</span>
-                
-                <div>
-                    <h3>Username</h3>
-                    <input type="text" name="username" required>
+            <div class="large-form-container">
+                <div class="large-form-info">
+                    <h1>Welcome Back!</h1>
+                    <p>Please login with your details so we can get you chatting.</p>
+                    <button id="signup-btn" type="button" data-type="basic">Signup</button>
                 </div>
 
-                <div>
-                    <h3>Password</h3>
-                    <input type="password" name="password" required>
+                <form id="login-form">
+                    <h1>Login to Chatterly</h1>
+                    
+                    <div>
+                        <h3>Username</h3>
+                        <input type="text" name="username" required>
+                    </div>
+
+                    <div>
+                        <h3>Password</h3>
+                        <input type="password" name="password" required>
+                    </div>
+
+                    <div class="form-btns">
+                        <button type="submit">Login</button>
+                        <button type="reset">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="large-form-container">
+                <div class="large-form-info">
+                    <h1>Welcome!</h1>
+                    <p>We are glad you want to try out Chatterly! Please create an account with your details so we can get you chatting.</p>
+                    <button id="login-btn" type="button" data-type="basic">Login</button>
                 </div>
 
-                <div class="form-btns">
-                    <button type="submit">Submit</button>
-                    <button type="reset" id="cancel-login-btn">Cancel</button>
-                    <button type="button" id="signup-btn">Don't have an account? Signup</button>
-                </div>
-            </form>
+                <form id="signup-form">
+                    <h1>Create an Account</h1>
 
-            <form id="signup-form">
-                <span id="signup-error">Error</span>
-                <span id="signup-success">Success! You can now login with these credentials</span>
+                    <div>
+                        <h3>Username</h3>
+                        <input type="text" name="username" required>
+                    </div>
 
-                <div>
-                    <h3>Username</h3>
-                    <input type="text" name="username" required>
-                </div>
+                    <div>
+                        <h3>Password</h3>
+                        <input type="password" name="password" required>
+                    </div>
 
-                <div>
-                    <h3>Password</h3>
-                    <input type="password" name="password" required>
-                </div>
-
-                <div class="form-btns">
-                    <button type="submit">Submit</button>
-                    <button type="reset" id="cancel-signup-btn">Cancel</button>
-                    <button type="button" id="login-btn">Already have an account? Login</button>
-                </div>
-            </form>
+                    <div class="form-btns">
+                        <button type="submit">Signup</button>
+                        <button type="reset">Cancel</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <script src="./resources/js/home.js"></script>
+        <script type="module" src="./resources/js/home.js"></script>
     </body>
 </html>

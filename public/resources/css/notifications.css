@@ -1,0 +1,58 @@
+@keyframes exit {
+    to {
+        transform: translateX(100vw);
+    }
+}
+
+@keyframes enter {
+    from {
+        transform: translateX(100vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.notifications-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5px 5px;
+
+    width: 13%;
+    height: 100%;
+
+    position: absolute;
+    left: 100%;
+    top: 0;
+    transform: translateX(-100%);
+}
+
+.notification {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: fit-content;
+    padding: 10px 10px;
+    color: #fff;
+    border-radius: 5px;
+    animation: enter 0.5s forwards;
+}
+
+.notification-header {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.notification-header button {
+    margin-left: auto;
+}
+
+.notification[data-type="success"] {
+    background-color: #4bff48;
+}
+
+.notification[data-type="error"] {
+    background-color: #ff4848;
+}
